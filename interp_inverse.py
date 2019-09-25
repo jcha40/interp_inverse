@@ -22,7 +22,7 @@ def invert(f, x, kind='linear', vectorized=False):
     if vectorized:
         y = f(x)
     else:
-        y = np.array((f(x_i) for x_i in x))
+        y = np.array([f(x_i) for x_i in x])
 
     if not np.issubdtype(y.dtype, np.number):
         raise ValueError('Input function is not numeric')
