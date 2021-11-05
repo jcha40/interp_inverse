@@ -27,13 +27,8 @@ def invert(f, x, kind='linear', vectorized=False):
     if not np.issubdtype(y.dtype, np.number):
         raise ValueError('Input function is not numeric')
 
-    n = len(x)
-    y_list = list(y)
-    if len(set(y_list)) != n:
-        raise ValueError('Non-invertible function')
-    
-    sorted_y = sorted(y_list)
-    if sorted_y != y_list and list(reversed(sorted_y)) != y_list:
+    diff_signs = np.sign(np.diff(y))
+    if not np.all(diff_signs == 1) and not np.all(diff_signs == -1):
         raise ValueError('Non-invertible function')
 
     if kind == 'spline':
